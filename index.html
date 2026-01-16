@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla.com</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+        .animate-slide-in {
+            animation: slideIn 1s ease-out;
+        }
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%), url('https://via.placeholder.com/1920x1080/000000/ffffff?text=Tesla+Hero');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #ff0000;
+        }
+        .carousel {
+            overflow: hidden;
+            position: relative;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .carousel-item {
+            min-width: 100%;
+        }
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .indicator.active {
+            background: #ff0000;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white font-sans min-h-screen">
+    <header class="bg-black bg-opacity-95 text-white py-6 shadow-2xl backdrop-blur-md fixed w-full z-50">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <div class="flex items-center animate-fade-in-up">
+                <img src="https://www.tesla.com/themes/custom/tesla_frontend/assets/favicons/favicon-32x32.png" alt="Tesla Logo" class="w-12 h-12 mr-4 animate-pulse">
+                <h1 class="text-5xl font-bold italic bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">Tesla</h1>
+            </div>
+            <nav class="animate-slide-in delay-200">
+                <ul class="flex space-x-8">
+                    <li><a href="#buy" class="hover:text-red-400 transition-all duration-300 flex items-center"><i class="fas fa-car mr-2"></i>Buy</a></li>
+                    <li><a href="#sell" class="hover:text-red-400 transition-all duration-300 flex items-center"><i class="fas fa-dollar-sign mr-2"></i>Sell</a></li>
+                    <li><a href="#contact" class="hover:text-red-400 transition-all duration-300 flex items-center"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" class="hero-bg min-h-screen flex items-center justify-center pt-24 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50"></div>
+        <div class="text-center animate-fade-in-up relative z-10">
+            <h2 class="text-7xl font-bold mb-6 text-white drop-shadow-2xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Welcome to Tesla</h2>
+            <p class="text-2xl mb-8 text-gray-200 animate-slide-in delay-200">Buy or Sell Your Dream Tesla Today</p>
+            <button onclick="scrollToSection('buy')" class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white py-4 px-10 rounded-full font-semibold transition-all duration-300 hover:scale-110 shadow-2xl animate-pulse">Get Started <i class="fas fa-arrow-down ml-2"></i></button>
+        </div>
+        <div class="carousel absolute bottom-10 w-full">
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <img src="model-s.png" alt="Model S" class="w-full h-60 object-cover opacity-70">
+                </div>
+                <div class="carousel-item">
+                    <img src="model-3.png" alt="Model 3" class="w-full h-60 object-cover opacity-70">
+                </div>
+                <div class="carousel-item">
+                    <img src="model-x.png" alt="Model X" class="w-full h-60 object-cover opacity-70">
+                </div>
+            </div>
+            <div class="carousel-indicators">
+                <div class="indicator active" onclick="goToSlide(0)"></div>
+                <div class="indicator" onclick="goToSlide(1)"></div>
+                <div class="indicator" onclick="goToSlide(2)"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="buy" class="py-24 bg-gradient-to-b from-black to-gray-900">
+        <div class="container mx-auto px-4">
+            <h3 class="text-5xl font-bold text-center mb-16 text-white animate-fade-in-up bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">Buy a Tesla</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 bg-opacity-20 backdrop-blur-lg p-8 rounded-2xl shadow-2xl card-hover animate-fade-in-up delay-200 cursor-pointer" onclick="openModal('Model S', 'Electric sedan with premium features.', 'model-s.html')">
+                    <i class="fas fa-car text-6xl text-red-500 mb-4"></i>
+                    <img src="model-s.png" alt="Model S" class="w-full h-48 object-cover mb-4 rounded-lg">
+                    <h4 class="text-3xl font-semibold mb-2 text-white">Model S</h4>
+                    <p class="text-gray-300 mb-4">Electric sedan with premium features.</p>
+                    <a href="model-s.html" class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white py-3 px-8 rounded-full inline-block text-center transition-all duration-300 hover:scale-105 shadow-lg">View Details <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 bg-opacity-20 backdrop-blur-lg p-8 rounded-2xl shadow-2xl card-hover animate-fade-in-up delay-400 cursor-pointer" onclick="openModal('Model 3', 'Affordable electric car for everyone.', 'model-3.html')">
+                    <i class="fas fa-car text-6xl text-blue-500 mb-4"></i>
+                    <img src="model-3.png" alt="Model 3" class="w-full h-48 object-cover mb-4 rounded-lg">
+                    <h4 class="text-3xl font-semibold mb-2 text-white">Model 3</h4>
+                    <p class="text-gray-300 mb-4">Affordable electric car for everyone.</p>
+                    <a href="model-3.html" class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white py-3 px-8 rounded-full inline-block text-center transition-all duration-300 hover:scale-105 shadow-lg">View Details <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 bg-opacity-20 backdrop-blur-lg p-8 rounded-2xl shadow-2xl card-hover animate-fade-in-up delay-600 cursor-pointer" onclick="openModal('Model X', 'SUV with falcon wing doors.', 'model-x.html')">
+                    <i class="fas fa-car text-6xl text-green-500 mb-4"></i>
+                    <img src="model-x.png" alt="Model X" class="w-full h-48 object-cover mb-4 rounded-lg">
+                    <h4 class="text-3xl font-semibold mb-2 text-white">Model X</h4>
+                    <p class="text-gray-300 mb-4">SUV with falcon wing doors.</p>
+                    <a href="model-x.html" class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white py-3 px-8 rounded-full inline-block text-center transition-all duration-300 hover:scale-105 shadow-lg">View Details <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 bg-opacity-20 backdrop-blur-lg p-8 rounded-2xl shadow-2xl card-hover animate-fade-in-up delay-200 cursor-pointer" onclick="openModal('Model Y', 'Compact SUV for family adventures.', 'model-y.html')">
+                    <i class="fas fa-car text-6xl text-yellow-500 mb-4"></i>
+                    <img src="model-y.png" alt="Model Y" class="w-full h-48 object-cover mb-4 rounded-lg">
+                    <h4 class="text-3xl font-semibold mb-2 text-white">Model Y</h4>
+                    <p class="text-gray-300 mb-4">Compact SUV for family adventures.</p>
+                    <a href="model-y.html" class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white py-3 px-8 rounded-full inline-block text-center transition-all duration-300 hover:scale-105 shadow-lg">View Details <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 bg-opacity-20 backdrop-blur-lg p-8 rounded-2xl shadow-2xl card-hover animate-fade-in-up delay-400 cursor-pointer" onclick="openModal('Cybertruck', 'Futuristic electric pickup truck.', 'cybertruck.html')">
+                    <i class="fas fa-truck text-6xl text-purple-500 mb-4"></i>
+                    <img src="cybertruck.png" alt="Cybertruck" class="w-full h-48 object-cover mb-4 rounded-lg">
+                    <h4 class="text-3xl font-semibold mb-2 text-white">Cybertruck</h4>
+                    <p class="text-gray-300 mb-4">Futuristic electric pickup truck.</p>
+                    <a href="cybertruck.html" class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white py-3 px-8 rounded-full inline-block text-center transition-all duration-300 hover:scale-105 shadow-lg">View Details <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 bg-opacity-20 backdrop-blur-lg p-8 rounded-2xl shadow-2xl card-hover animate-fade-in-up delay-600 cursor-pointer" onclick="openModal('Roadster', 'High-performance electric sports car.', 'roadster.html')">
+                    <i class="fas fa-rocket text-6xl text-orange-500 mb-4"></i>
+                    <img src="roadster.png" alt="Roadster" class="w-full h-48 object-cover mb-4 rounded-lg">
+                    <h4 class="text-3xl font-semibold mb-2 text-white">Roadster</h4>
+                    <p class="text-gray-300 mb-4">High-performance electric sports car.</p>
+                    <a href="roadster.html" class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white py-3 px-8 rounded-full inline-block text-center transition-all duration-300 hover:scale-105 shadow-lg">View Details <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sell" class="py-24 bg-gradient-to-b from-gray-900 to-black">
+        <div class="container mx-auto px-4">
+            <h3 class="text-5xl font-bold text-center mb-16 text-white animate-fade-in-up bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">Sell Your Tesla</h3>
+            <form id="sellForm" class="max-w-xl mx-auto bg-gradient-to-br from-gray-800 to-gray-900 bg-opacity-20 backdrop-blur-lg p-10 rounded-2xl shadow-2xl animate-fade-in-up delay-200">
+                <div class="mb-8">
+                    <label for="model" class="block text-white font-semibold mb-3 flex items-center"><i class="fas fa-car mr-2"></i>Model</label>
+                    <select id="model" class="w-full p-4 border border-gray-600 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                        <option>Select Model</option>
+                        <option>Model S</option>
+                        <option>Model 3</option>
+                        <option>Model X</option>
+                        <option>Model Y</option>
+                        <option>Cybertruck</option>
+                        <option>Roadster</option>
+                    </select>
+                </div>
+                <div class="mb-8">
+                    <label for="year" class="block text-white font-semibold mb-3 flex items-center"><i class="fas fa-calendar mr-2"></i>Year</label>
+                    <input type="number" id="year" class="w-full p-4 border border-gray-600 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" placeholder="e.g., 2020">
+                </div>
+                <div class="mb-8">
+                    <label for="mileage" class="block text-white font-semibold mb-3 flex items-center"><i class="fas fa-tachometer-alt mr-2"></i>Mileage</label>
+                    <input type="number" id="mileage" class="w-full p-4 border border-gray-600 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" placeholder="e.g., 15000">
+                </div>
+                <div class="mb-8">
+                    <label for="condition" class="block text-white font-semibold mb-3 flex items-center"><i class="fas fa-star mr-2"></i>Condition</label>
+                    <select id="condition" class="w-full p-4 border border-gray-600 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                        <option>Excellent</option>
+                        <option>Good</option>
+                        <option>Fair</option>
+                        <option>Poor</option>
+                    </select>
+                </div>
+                <button type="submit" class="bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white py-4 px-8 rounded-full w-full font-semibold transition-all duration-300 hover:scale-105 shadow-lg">Submit for Valuation <i class="fas fa-paper-plane ml-2"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-gradient-to-b from-gray-900 to-black">
+        <div class="container mx-auto px-4 text-center animate-fade-in-up">
+            <h3 class="text-5xl font-bold mb-12 text-white bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Contact Us</h3>
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="#" class="text-4xl text-blue-500 hover:text-blue-400 transition-colors"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-4xl text-blue-400 hover:text-blue-300 transition-colors"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-4xl text-pink-500 hover:text-pink-400 transition-colors"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-4xl text-red-500 hover:text-red-400 transition-colors"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="text-2xl mb-4 text-gray-300"><i class="fas fa-envelope mr-2"></i>Email: info@tesla.com</p>
+            <p class="text-2xl text-gray-300"><i class="fas fa-phone mr-2"></i>Phone: +1 (123) 456-7890</p>
+        </div>
+    </section>
+
+    <footer class="bg-black text-white py-8 text-center shadow-2xl">
+        <p class="text-gray-400 text-lg">&copy; 2026 Tesla. All rights reserved. <i class="fas fa-heart text-red-500 ml-2"></i></p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle" class="text-3xl font-bold mb-6 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent"></h2>
+            <p id="modalDescription" class="mb-6 text-lg"></p>
+            <a id="modalLink" href="#" class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white py-3 px-8 rounded-full transition-all duration-300 hover:scale-105 shadow-lg">View Details <i class="fas fa-external-link-alt ml-2"></i></a>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const indicators = document.querySelectorAll('.indicator');
+
+        function goToSlide(index) {
+            currentSlide = index;
+            document.querySelector('.carousel-inner').style.transform = `translateX(-${index * 100}%)`;
+            indicators.forEach((ind, i) => ind.classList.toggle('active', i === index));
+        }
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            goToSlide(currentSlide);
+        }, 5000);
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openModal(title, description, link) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDescription').innerText = description;
+            document.getElementById('modalLink').href = link;
+            document.getElementById('myModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                closeModal();
+            }
+        }
+
+        document.getElementById('sellForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const model = document.getElementById('model').value;
+            const year = document.getElementById('year').value;
+            const mileage = document.getElementById('mileage').value;
+            const condition = document.getElementById('condition').value;
+            alert(`Thank you! We'll contact you soon for your ${model} (${year}, ${mileage} miles, ${condition} condition).`);
+        });
+
+        // Add scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        });
+
+        document.querySelectorAll('.card-hover').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

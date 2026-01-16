@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model S - Tesla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+        .animate-slide-in {
+            animation: slideIn 1s ease-out;
+        }
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        .animate-bounce {
+            animation: bounce 2s infinite;
+        }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%), url('model-s.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+        .gallery {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+        .gallery img {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white font-sans min-h-screen">
+    <header class="bg-black bg-opacity-95 text-white py-6 shadow-2xl backdrop-blur-md fixed w-full z-50">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <div class="flex items-center animate-fade-in-up">
+                <img src="https://www.tesla.com/themes/custom/tesla_frontend/assets/favicons/favicon-32x32.png" alt="Tesla Logo" class="w-12 h-12 mr-4 animate-pulse">
+                <a href="index.html" class="text-4xl font-bold italic bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent hover:text-red-400 transition-colors duration-300">Tesla</a>
+            </div>
+            <nav class="animate-slide-in delay-200">
+                <ul class="flex space-x-8">
+                    <li><a href="index.html#buy" class="hover:text-red-400 transition-all duration-300 flex items-center"><i class="fas fa-arrow-left mr-2"></i>Back to Models</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-bg min-h-screen flex items-center justify-center pt-24 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50"></div>
+        <div class="text-center animate-fade-in-up relative z-10">
+            <i class="fas fa-car text-9xl text-red-500 mb-6 animate-bounce"></i>
+            <h1 class="text-8xl font-bold mb-6 text-white drop-shadow-2xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Model S</h1>
+            <p class="text-3xl mb-8 text-gray-200 animate-slide-in delay-200">Electric sedan with premium features</p>
+            <button onclick="alert('Purchase process initiated for Model S')" class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white py-5 px-12 rounded-full font-semibold transition-all duration-300 hover:scale-110 shadow-2xl animate-pulse text-xl">Buy Now <i class="fas fa-shopping-cart ml-3"></i></button>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gradient-to-b from-black to-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 bg-opacity-20 backdrop-blur-lg p-10 rounded-2xl shadow-2xl card-hover animate-fade-in-up delay-200">
+                    <h2 class="text-4xl font-semibold mb-8 text-white bg-gradient-to-r from-red-500 to-purple-500 bg-clip-text text-transparent flex items-center"><i class="fas fa-cogs mr-4 text-red-500 animate-spin"></i>Specifications</h2>
+                    <ul class="space-y-6 text-gray-300">
+                        <li class="flex items-center text-lg"><span class="w-4 h-4 bg-red-500 rounded-full mr-6 animate-pulse"></span>Range: Up to 405 miles</li>
+                        <li class="flex items-center text-lg"><span class="w-4 h-4 bg-red-500 rounded-full mr-6 animate-pulse"></span>Acceleration: 0-60 mph in 3.1 seconds</li>
+                        <li class="flex items-center text-lg"><span class="w-4 h-4 bg-red-500 rounded-full mr-6 animate-pulse"></span>Top Speed: 140 mph</li>
+                        <li class="flex items-center text-lg"><span class="w-4 h-4 bg-red-500 rounded-full mr-6 animate-pulse"></span>Seating: 5 adults</li>
+                        <li class="flex items-center text-lg"><span class="w-4 h-4 bg-red-500 rounded-full mr-6 animate-pulse"></span>Price: Starting at $94,990</li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 bg-opacity-20 backdrop-blur-lg p-10 rounded-2xl shadow-2xl card-hover animate-fade-in-up delay-400">
+                    <h2 class="text-4xl font-semibold mb-8 text-white bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent flex items-center"><i class="fas fa-star mr-4 text-green-500 animate-bounce"></i>Features</h2>
+                    <ul class="space-y-6 text-gray-300">
+                        <li class="flex items-center text-lg"><span class="w-4 h-4 bg-green-500 rounded-full mr-6 animate-pulse"></span>Autopilot</li>
+                        <li class="flex items-center text-lg"><span class="w-4 h-4 bg-green-500 rounded-full mr-6 animate-pulse"></span>Premium audio system</li>
+                        <li class="flex items-center text-lg"><span class="w-4 h-4 bg-green-500 rounded-full mr-6 animate-pulse"></span>Large touchscreen</li>
+                        <li class="flex items-center text-lg"><span class="w-4 h-4 bg-green-500 rounded-full mr-6 animate-pulse"></span>Supercharger network access</li>
+                        <li class="flex items-center text-lg"><span class="w-4 h-4 bg-green-500 rounded-full mr-6 animate-pulse"></span>Over-the-air updates</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gradient-to-b from-gray-900 to-black">
+        <div class="container mx-auto px-4">
+            <h3 class="text-5xl font-bold text-center mb-12 text-white bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent animate-fade-in-up">Gallery</h3>
+            <div class="gallery space-x-4 pb-4">
+                <img src="models-interior.png" alt="Model S Interior" class="w-96 h-64 object-cover rounded-lg shadow-lg">
+                <img src="models-exterior.png" alt="Model S Exterior" class="w-96 h-64 object-cover rounded-lg shadow-lg">
+                <img src="models-dashboard.png" alt="Model S Dashboard" class="w-96 h-64 object-cover rounded-lg shadow-lg">
+                <img src="models-charging.png" alt="Model S Charging" class="w-96 h-64 object-cover rounded-lg shadow-lg">
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black text-white py-8 text-center shadow-2xl">
+        <p class="text-gray-400 text-lg">&copy; 2026 Tesla. All rights reserved. <i class="fas fa-heart text-red-500 ml-2 animate-pulse"></i></p>
+    </footer>
+</body>
+</html>
